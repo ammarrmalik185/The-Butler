@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Temp
+        run: echo Test Passes!
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Starting Deploy
+        run: echo Hello, world!
+        
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Firebase Deployment
+        uses: sws2apps/firebase-deployment@v3.0.1
+        with:
+          workloadIdentityProvider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          serviceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_THE_BUTLER_X }}
+          project: the-butler-x
+          config: 'firebase-backend/firebase.json'
+          function: false
+          hosting: true
