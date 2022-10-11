@@ -31,3 +31,4 @@ jobs:
         with:
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_THE_BUTLER_X }}"
           projectId: your-Firebase-project-ID
+          entryPoint: 'firebase-backend/firebase.json'
