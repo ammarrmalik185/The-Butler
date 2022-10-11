@@ -26,12 +26,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Firebase Deployment
-        uses: sws2apps/firebase-deployment@v3.0.1
+      - uses: actions/checkout@v2
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          serviceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_THE_BUTLER_X }}
-          project: the-butler-x
-          config: 'firebase-backend/firebase.json'
-          function: false
-          hosting: true
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_THE_BUTLER_X }}"
+          projectId: your-Firebase-project-ID
