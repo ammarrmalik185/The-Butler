@@ -26,6 +26,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Firebase Deployment
         uses: sws2apps/firebase-deployment@v3.0.1
         with:
