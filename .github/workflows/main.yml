@@ -64,7 +64,7 @@ jobs:
 
 
   deploy_frontend_firebase:
-  if: ${{ env.BRANCH_NAME }} == 'master'
+    if: ${{ env.BRANCH_NAME }} == 'master'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
