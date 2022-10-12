@@ -2,9 +2,13 @@ name: CI
 
 on:
   push:
-    branches: ${{ github.head_ref || github.ref_name }} 
+    branches: 
+      - master
+      - dev
   pull_request:
-    branches: ${{ github.head_ref || github.ref_name }} 
+    branches: 
+      - master
+      - dev
 
   workflow_dispatch:
 
