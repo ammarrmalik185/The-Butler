@@ -9,21 +9,19 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  deploy_backend_heroku:
     runs-on: ubuntu-latest
     steps:
-      - name: Temp
-        run: echo Test Passes!
+      - name: Deploy to Heroku
+        uses: AkhileshNS/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_email: ammarrmalik185@hotmail.com
+          heroku_app_name: the-butler-x
+          buildpack: heroku/nodejs
+          appdir: 'node-backend/'
 
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Starting Deploy
-        run: echo Hello, world!
-
-  deploy:
+  deploy_frontend_firebase:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
