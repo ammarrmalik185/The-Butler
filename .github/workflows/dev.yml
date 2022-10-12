@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: 
+      - dev
+  pull_request:
+    branches: 
+      - dev
+
+  workflow_dispatch:
+
+jobs:
+
+  deploy_backend_heroku_dev:
+    needs: setup_environment_variables
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Deploy Backend To Heroku Dev
+        uses: AkhileshNS/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_email: ammarrmalik185@hotmail.com
+          heroku_app_name: the-butler-x-dev
+          buildpack: heroku/nodejs
+          appdir: 'node-backend/'
+
+  deploy_frontend_firebase_dev:
+    needs: setup_environment_variables
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Firebase Hosting Deploy Dev
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_THE_BUTLER_X }}"
+          projectId: the-butler-x
+          channelId: dev
+          entryPoint: 'firebase-backend/'
