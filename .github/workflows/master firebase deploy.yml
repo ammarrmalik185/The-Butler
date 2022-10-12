@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: 
+      - master
+    paths:
+      - 'firebase-backend/hosting/**'
+      - '.github/workflows/master firebase deploy.yml'
+    
+  pull_request:
+    branches: 
+      - master
+    paths:
+      - 'firebase-backend/hosting/**'
+      - '.github/workflows/master firebase deploy.yml'
+
+  workflow_dispatch:
+
+jobs:
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Firebase Hosting Deploy Live
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_THE_BUTLER_X }}"
+          projectId: the-butler-x
+          channelId: live
+          entryPoint: 'firebase-backend/'
