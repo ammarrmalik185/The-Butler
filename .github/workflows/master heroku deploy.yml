@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: 
+      - master
+    paths:
+      - 'node-backend/**'
+      - '.github/workflows/master heroku deploy.yml'
+    
+  pull_request:
+    branches: 
+      - master
+    paths:
+      - 'node-backend/**'
+      - '.github/workflows/master heroku deploy.yml'
+
+  workflow_dispatch:
+
+jobs:
+
+  deploy_backend_heroku:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Deploy Backend To Heroku Live
+        uses: AkhileshNS/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_email: ammarrmalik185@hotmail.com
+          heroku_app_name: the-butler-x
+          buildpack: heroku/nodejs
+          appdir: 'node-backend/'
