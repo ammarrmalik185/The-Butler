@@ -12,9 +12,12 @@ jobs:
   deploy_backend_heroku:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to Heroku
-      - uses: actions/checkout@v2
-      - uses: AkhileshNS/heroku-deploy@v3.12.12
+    
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Deploy Backend To Heroku
+        uses: AkhileshNS/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_email: ammarrmalik185@hotmail.com
@@ -22,9 +25,11 @@ jobs:
           buildpack: heroku/nodejs
           appdir: 'node-backend/'
 
+
   deploy_frontend_firebase:
     runs-on: ubuntu-latest
     steps:
+    
       - name: Checkout
         uses: actions/checkout@v2
       
