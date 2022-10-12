@@ -19,7 +19,7 @@ on:
 
 jobs:
 
-  deploy_backend_heroku_dev:
+  deploy:
     runs-on: ubuntu-latest
     steps:
 

@@ -19,7 +19,7 @@ on:
 
 jobs:
 
-  deploy_frontend_firebase_dev:
+  deploy:
     runs-on: ubuntu-latest
     steps:
 
