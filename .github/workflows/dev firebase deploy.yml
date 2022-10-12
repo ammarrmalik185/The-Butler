@@ -1,4 +1,4 @@
-name: CI
+name: Dev/Firebase Hosting Deployment
 
 on:
   push:
