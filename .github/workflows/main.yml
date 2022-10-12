@@ -29,8 +29,8 @@ jobs:
         - name: variables output
           id: variables
           run: echo ${{ env.BRANCH_NAME }}
-        outputs:
-          BRANCH_NAME: ${{ steps.variables.outputs.BRANCH_NAME }}
+      outputs:
+        BRANCH_NAME: ${{ steps.variables.outputs.BRANCH_NAME }}
 
   deploy_backend_heroku:
     needs: setup_environment_variables
