@@ -1,4 +1,4 @@
-name: CI
+name: Master/Heroku Hosting Deployment
 
 on:
   push:
