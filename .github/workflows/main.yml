@@ -30,6 +30,7 @@ jobs:
           run: echo ${{ env.BRANCH_NAME }}
 
   deploy_backend_heroku:
+    if: ${{ env.BRANCH_NAME }} == 'master'
     runs-on: ubuntu-latest
     steps:
     
@@ -37,7 +38,6 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Deploy Backend To Heroku Live
-        if: ${{ env.BRANCH_NAME }} == 'master'
         uses: AkhileshNS/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
@@ -46,8 +46,16 @@ jobs:
           buildpack: heroku/nodejs
           appdir: 'node-backend/'
 
+  deploy_backend_heroku_dev:
+
+    
+
+    if: ${{ env.BRANCH_NAME }} == 'dev'
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Deploy Backend To Heroku Dev
-        if: ${{ env.BRANCH_NAME }} == 'dev'
         uses: AkhileshNS/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
