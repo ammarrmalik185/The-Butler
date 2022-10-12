@@ -14,21 +14,21 @@ on:
 
 jobs:
   setup_environment_variables:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Get branch name (merge)
-          if: github.event_name != 'pull_request'
-          shell: bash
-          run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get branch name (merge)
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
 
-        - name: Get branch name (pull request)
-          if: github.event_name == 'pull_request'
-          shell: bash
-          run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
+      - name: Get branch name (pull request)
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 
-        - name: variables output
-          id: variables
-          run: echo ${{ env.BRANCH_NAME }}
+      - name: variables output
+        id: variables
+        run: echo ${{ env.BRANCH_NAME }}
       outputs:
         BRANCH_NAME: ${{ steps.variables.outputs.BRANCH_NAME }}
 
@@ -37,7 +37,9 @@ jobs:
     if: ${{ needs.setup_environment_variables.outputs.BRANCH_NAME }} == 'master'
     runs-on: ubuntu-latest
     steps:
-    
+      - name: Debug
+        run: echo ${{ needs.setup_environment_variables.outputs.BRANCH_NAME }}
+
       - name: Checkout
         uses: actions/checkout@v2
         
@@ -55,6 +57,9 @@ jobs:
     if: ${{ needs.setup_environment_variables.outputs.BRANCH_NAME }} == 'dev'
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        run: echo ${{ needs.setup_environment_variables.outputs.BRANCH_NAME }}
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -73,6 +78,9 @@ jobs:
     if: ${{ needs.setup_environment_variables.outputs.BRANCH_NAME }} == 'master'
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        run: echo ${{ needs.setup_environment_variables.outputs.BRANCH_NAME }}
+
       - name: Checkout
         uses: actions/checkout@v2
       
@@ -89,6 +97,9 @@ jobs:
     if: ${{ needs.setup_environment_variables.outputs.BRANCH_NAME }} == 'dev'
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        run: echo ${{ needs.setup_environment_variables.outputs.BRANCH_NAME }}
+
       - name: Checkout
         uses: actions/checkout@v2
 
