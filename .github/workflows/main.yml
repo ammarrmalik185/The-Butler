@@ -25,6 +25,7 @@ jobs:
   deploy_frontend_firebase:
     runs-on: ubuntu-latest
     steps:
+      - name: Deploy To Firebase Hosting
       - uses: actions/checkout@v2
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
