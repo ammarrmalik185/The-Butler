@@ -47,11 +47,9 @@ jobs:
           appdir: 'node-backend/'
 
   deploy_backend_heroku_dev:
-
-    
-
     if: ${{ env.BRANCH_NAME }} == 'dev'
-
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -66,24 +64,29 @@ jobs:
 
 
   deploy_frontend_firebase:
+  if: ${{ env.BRANCH_NAME }} == 'master'
     runs-on: ubuntu-latest
     steps:
-    
       - name: Checkout
         uses: actions/checkout@v2
       
       - name: Firebase Hosting Deploy Live
         uses: FirebaseExtended/action-hosting-deploy@v0
-        if: ${{ env.BRANCH_NAME }} == 'master'
         with:
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_THE_BUTLER_X }}"
           projectId: the-butler-x
           channelId: live
           entryPoint: 'firebase-backend/'
 
-      - name: Firebase Hosting Deploy Live
+  deploy_frontend_firebase_dev:
+    if: ${{ env.BRANCH_NAME }} == 'dev'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Firebase Hosting Deploy Dev
         uses: FirebaseExtended/action-hosting-deploy@v0
-        if: ${{ env.BRANCH_NAME }} == 'dev'
         with:
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_THE_BUTLER_X }}"
           projectId: the-butler-x
